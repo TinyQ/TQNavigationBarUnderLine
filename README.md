@@ -9,17 +9,18 @@ Easy way to set under line for UINavigationBar
 
 set color
 
-	```objective-c
+```objective-c
 
-	[self.navigationController.navigationBar ul_setUnderLineColor:[UIColor redColor]];
+[self.navigationController.navigationBar ul_setUnderLineColor:[UIColor redColor]];
 
-	```
+```
 	
 reset
 
-	```objective-c
 
-	[self.navigationController.navigationBar ul_reset];
+```objective-c
 
-	```
+[self.navigationController.navigationBar ul_reset];
+
+```
 	
