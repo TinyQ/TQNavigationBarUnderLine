@@ -20,6 +20,7 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor colorWithRed: 0.9118 green: 0.9118 blue: 0.9118 alpha: 1.0]];
+    
     [self.navigationController.navigationBar ul_setUnderLineColor:[UIColor redColor]];
 }
 

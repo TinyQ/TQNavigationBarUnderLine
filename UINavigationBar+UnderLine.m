@@ -11,7 +11,6 @@
 
 @implementation UINavigationBar (UnderLine)
 static char overlayKey;
-static char emptyImageKey;
 
 - (UIView *)overlay
 {
@@ -21,16 +20,6 @@ static char emptyImageKey;
 - (void)setOverlay:(UIView *)overlay
 {
     objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (UIImage *)emptyImage
-{
-    return objc_getAssociatedObject(self, &emptyImageKey);
-}
-
-- (void)setEmptyImage:(UIImage *)image
-{
-    objc_setAssociatedObject(self, &emptyImageKey, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)ul_setUnderLineColor:(UIColor *)color
@@ -49,6 +38,10 @@ static char emptyImageKey;
             {
                 shadowView = [view valueForKey:@"_shadowView"];
 
+                if (shadowView == nil) {
+                    return;
+                }
+                
                 self.overlay = [[UIView alloc] initWithFrame:shadowView.frame];
                 self.overlay.userInteractionEnabled = NO;
                 self.overlay.translatesAutoresizingMaskIntoConstraints = NO;
@@ -97,7 +90,10 @@ static char emptyImageKey;
             }
         }
     }
-    self.overlay.backgroundColor = color;
+    
+    if (self.overlay) {
+        self.overlay.backgroundColor = color;
+    }
 }
 
 - (void)ul_reset
