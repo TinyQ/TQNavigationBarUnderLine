@@ -1,5 +1,5 @@
 # TQNavigationBarUnderLine
-Easy way to set under line for UINavigationBar
+Easy way to set under line for UINavigationBar (iOS7 available)
 
 ##Demo
 
