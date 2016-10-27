@@ -34,7 +34,7 @@ static char overlayKey;
         {
             NSString *viewName = NSStringFromClass([view class]);
             
-            if ([viewName isEqualToString:@"_UINavigationBarBackground"])
+            if ([viewName isEqualToString:@"_UINavigationBarBackground"] || [viewName isEqualToString:@"_UIBarBackground"])
             {
                 shadowView = [view valueForKey:@"_shadowView"];
 
