@@ -4,7 +4,7 @@ Easy way to set under line Color for UINavigationBar (iOS7 available) .
 
 ## Demo
 
-![Mou icon](img/demo.jpg)
+![Mou icon](images/demo.jpg)
 
 ## Usage
 
