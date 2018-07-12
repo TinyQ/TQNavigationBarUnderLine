@@ -12,32 +12,23 @@
 @implementation UINavigationBar (UnderLine)
 static char overlayKey;
 
-- (UIView *)overlay
-{
+- (UIView *)overlay {
     return objc_getAssociatedObject(self, &overlayKey);
 }
 
-- (void)setOverlay:(UIView *)overlay
-{
+- (void)setOverlay:(UIView *)overlay {
     objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)ul_setUnderLineColor:(UIColor *)color
-{
-    if (!self.overlay)
-    {
+- (void)ul_setUnderLineColor:(UIColor *)color {
+    if (!self.overlay) {
         UIImageView *shadowView = nil;
-        
         NSArray *navigationBarSubviews = [self subviews];
-        
-        for (UIView *view in navigationBarSubviews)
-        {
+        for (UIView *view in navigationBarSubviews) {
             NSString *viewName = NSStringFromClass([view class]);
             
-            if ([viewName isEqualToString:@"_UINavigationBarBackground"] || [viewName isEqualToString:@"_UIBarBackground"])
-            {
+            if ([viewName isEqualToString:@"_UINavigationBarBackground"] || [viewName isEqualToString:@"_UIBarBackground"]) {
                 shadowView = [view valueForKey:@"_shadowView"];
-
                 if (shadowView == nil) {
                     return;
                 }
@@ -46,9 +37,7 @@ static char overlayKey;
                 self.overlay.userInteractionEnabled = NO;
                 self.overlay.translatesAutoresizingMaskIntoConstraints = NO;
                 [view addSubview:self.overlay];
-                
                 [view addConstraints:@[
-                                       
                     [NSLayoutConstraint constraintWithItem:self.overlay
                                                  attribute:NSLayoutAttributeTop
                                                  relatedBy:NSLayoutRelationEqual
@@ -96,8 +85,7 @@ static char overlayKey;
     }
 }
 
-- (void)ul_reset
-{
+- (void)ul_reset {
     [self.overlay removeFromSuperview];
     self.overlay = nil;
 }

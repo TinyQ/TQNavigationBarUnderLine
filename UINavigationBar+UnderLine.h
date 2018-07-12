@@ -10,8 +10,16 @@
 
 @interface UINavigationBar (UnderLine)
 
+/**
+ add under line view in UINavigationBar`s ShadowView with color background.
+
+ @param color line background color.
+ */
 - (void)ul_setUnderLineColor:(UIColor *)color;
 
+/**
+ remove under line view.
+ */
 - (void)ul_reset;
 
 @end
