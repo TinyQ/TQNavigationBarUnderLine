@@ -1,13 +1,14 @@
 # TQNavigationBarUnderLine
-Easy way to set under line for UINavigationBar (iOS7 available)
+
+Easy way to set under line Color for UINavigationBar (iOS7 available) .
 
 ## Demo
 
-![Mou icon](img/demo.png)
+![Mou icon](img/demo.jpg)
 
 ## Usage
 
-set color
+set
 
 ```objective-c
 
@@ -15,8 +16,7 @@ set color
 
 ```
 	
-reset
-
+remove
 
 ```objective-c
 
