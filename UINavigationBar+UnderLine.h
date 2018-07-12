@@ -11,7 +11,12 @@
 @interface UINavigationBar (UnderLine)
 
 /**
- add under line view in UINavigationBar`s ShadowView with color background.
+ The ender line overlay view.
+ */
+@property (nonatomic, strong, readonly) UIView *overlay;
+
+/**
+ Add overlay under line view in UINavigationBar`s ShadowView with color background.
 
  @param color line background color.
  */

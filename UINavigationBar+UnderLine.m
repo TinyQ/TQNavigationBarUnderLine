@@ -9,16 +9,25 @@
 #import "UINavigationBar+UnderLine.h"
 #import <objc/runtime.h>
 
+// before iOS 10 use _UINavigationBarBackground
+#define UINavigationBarBackground @"_UINavigationBarBackground"
+// after iOS 10 use _UIBarBackground
+#define UIBarBackground @"_UIBarBackground"
+
+#define ShadowView @"_shadowView"
+
 @implementation UINavigationBar (UnderLine)
-static char overlayKey;
+@dynamic overlay;
 
 - (UIView *)overlay {
-    return objc_getAssociatedObject(self, &overlayKey);
+    return objc_getAssociatedObject(self, @selector(overlay));
 }
 
 - (void)setOverlay:(UIView *)overlay {
-    objc_setAssociatedObject(self, &overlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(overlay), overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+#pragma mark - public
 
 - (void)ul_setUnderLineColor:(UIColor *)color {
     if (!self.overlay) {
@@ -26,9 +35,9 @@ static char overlayKey;
         NSArray *navigationBarSubviews = [self subviews];
         for (UIView *view in navigationBarSubviews) {
             NSString *viewName = NSStringFromClass([view class]);
-            
-            if ([viewName isEqualToString:@"_UINavigationBarBackground"] || [viewName isEqualToString:@"_UIBarBackground"]) {
-                shadowView = [view valueForKey:@"_shadowView"];
+            if ([viewName isEqualToString:UINavigationBarBackground] ||
+                [viewName isEqualToString:UIBarBackground]) {
+                shadowView = [view valueForKey:ShadowView];
                 if (shadowView == nil) {
                     return;
                 }
@@ -37,40 +46,7 @@ static char overlayKey;
                 self.overlay.userInteractionEnabled = NO;
                 self.overlay.translatesAutoresizingMaskIntoConstraints = NO;
                 [view addSubview:self.overlay];
-                [view addConstraints:@[
-                    [NSLayoutConstraint constraintWithItem:self.overlay
-                                                 attribute:NSLayoutAttributeTop
-                                                 relatedBy:NSLayoutRelationEqual
-                                                    toItem:shadowView
-                                                 attribute:NSLayoutAttributeTop
-                                                multiplier:1.0
-                                                  constant:0],
-                    
-                    [NSLayoutConstraint constraintWithItem:self.overlay
-                                                 attribute:NSLayoutAttributeBottom
-                                                 relatedBy:NSLayoutRelationEqual
-                                                    toItem:shadowView
-                                                 attribute:NSLayoutAttributeBottom
-                                                multiplier:1.0
-                                                  constant:0],
-                    
-                    [NSLayoutConstraint constraintWithItem:self.overlay
-                                                 attribute:NSLayoutAttributeLeft
-                                                 relatedBy:NSLayoutRelationEqual
-                                                    toItem:shadowView
-                                                 attribute:NSLayoutAttributeLeft
-                                                multiplier:1.0
-                                                  constant:0],
-                    
-                    [NSLayoutConstraint constraintWithItem:self.overlay
-                                                 attribute:NSLayoutAttributeRight
-                                                 relatedBy:NSLayoutRelationEqual
-                                                    toItem:shadowView
-                                                 attribute:NSLayoutAttributeRight
-                                                multiplier:1
-                                                  constant:0],
-                    ]];
-                
+                [view addConstraints:[[self class] fillingConstraintsView:self.overlay superView:shadowView]];
                 break;
             }
             
@@ -88,6 +64,41 @@ static char overlayKey;
 - (void)ul_reset {
     [self.overlay removeFromSuperview];
     self.overlay = nil;
+}
+
+#pragma mark - helper
+
++ (NSArray<__kindof NSLayoutConstraint *> *)fillingConstraintsView:(UIView *)view superView:(UIView *)superView {
+    return @[
+             [NSLayoutConstraint constraintWithItem:view
+                                          attribute:NSLayoutAttributeTop
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:superView
+                                          attribute:NSLayoutAttributeTop
+                                         multiplier:1.0
+                                           constant:0],
+             [NSLayoutConstraint constraintWithItem:view
+                                          attribute:NSLayoutAttributeBottom
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:superView
+                                          attribute:NSLayoutAttributeBottom
+                                         multiplier:1.0
+                                           constant:0],
+             [NSLayoutConstraint constraintWithItem:view
+                                          attribute:NSLayoutAttributeLeft
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:superView
+                                          attribute:NSLayoutAttributeLeft
+                                         multiplier:1.0
+                                           constant:0],
+             [NSLayoutConstraint constraintWithItem:view
+                                          attribute:NSLayoutAttributeRight
+                                          relatedBy:NSLayoutRelationEqual
+                                             toItem:superView
+                                          attribute:NSLayoutAttributeRight
+                                         multiplier:1.0
+                                           constant:0]
+             ];
 }
 
 @end
