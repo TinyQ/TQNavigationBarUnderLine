@@ -1,5 +1,9 @@
 # TQNavigationBarUnderLine
 
+[![Version](https://img.shields.io/cocoapods/v/TQNavigationBarUnderLine.svg?style=flat)](https://cocoapods.org/pods/TQNavigationBarUnderLine)
+[![License](https://img.shields.io/cocoapods/l/TQNavigationBarUnderLine.svg?style=flat)](https://cocoapods.org/pods/TQNavigationBarUnderLine)
+[![Platform](https://img.shields.io/cocoapods/p/TQNavigationBarUnderLine.svg?style=flat)](https://cocoapods.org/pods/TQNavigationBarUnderLine)
+
 Easy way to set under line Color for UINavigationBar (iOS7 available) .
 
 ## Example
