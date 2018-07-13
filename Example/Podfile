@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TQNavigationBarUnderLine_Example' do
+  pod 'TQNavigationBarUnderLine', :path => '../'
+
+  target 'TQNavigationBarUnderLine_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
