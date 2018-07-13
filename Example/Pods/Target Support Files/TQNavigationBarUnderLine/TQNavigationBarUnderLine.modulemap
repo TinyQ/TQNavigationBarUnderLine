@@ -1,6 +1,0 @@
-framework module TQNavigationBarUnderLine {
-  umbrella header "TQNavigationBarUnderLine-umbrella.h"
-
-  export *
-  module * { export * }
-}
