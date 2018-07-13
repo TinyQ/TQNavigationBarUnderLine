@@ -11,7 +11,26 @@ Easy way to set under line Color for UINavigationBar (iOS7 available) .
 
 ![Mou icon](images/demo.jpg)
 
+## Installation
+
+TQNavigationBarUnderLine is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'TQNavigationBarUnderLine'
+```
+
 ## Usage
+
+import
+
+```objective-c
+
+#import <TQNavigationBarUnderLine/TQNavigationBarUnderLine.h>
+// or
+@import TQNavigationBarUnderLine;
+
+```
 
 set
 
@@ -27,15 +46,6 @@ remove
 
 [self.navigationController.navigationBar ul_reset];
 
-```
-
-## Installation
-
-TQNavigationBarUnderLine is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'TQNavigationBarUnderLine'
 ```
 
 ## Author

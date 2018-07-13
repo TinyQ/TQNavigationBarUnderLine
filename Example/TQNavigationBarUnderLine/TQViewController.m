@@ -7,7 +7,7 @@
 //
 
 #import "TQViewController.h"
-@import TQNavigationBarUnderLine;
+#import <TQNavigationBarUnderLine/TQNavigationBarUnderLine.h>
 
 @interface TQViewController ()
 
