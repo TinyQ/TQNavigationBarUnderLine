@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                    = "TQNavigationBarUnderLine"
-  s.version                 = "0.1.0"
+  s.version                 = "0.1.1"
   s.summary                 = "Easy way to set under line Color for iOS UINavigationBar."
 
   s.description             = <<-DESC
