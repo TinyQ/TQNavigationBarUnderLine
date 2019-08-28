@@ -10,11 +10,11 @@
 #import <objc/runtime.h>
 
 // before iOS 10 use _UINavigationBarBackground
-#define UINavigationBarBackground @"_UINavigationBarBackground"
+static NSString *const UINavigationBarBackground = @"_UINavigationBarBackground";
 // after iOS 10 use _UIBarBackground
-#define UIBarBackground @"_UIBarBackground"
+static NSString *const UIBarBackground = @"_UIBarBackground";
 
-#define ShadowView @"_shadowView"
+static NSString *const ShadowView = @"_shadowView";
 
 @implementation UINavigationBar (UnderLine)
 @dynamic overlay;
@@ -31,26 +31,26 @@
 
 - (void)ul_setUnderLineColor:(UIColor *)color {
     if (!self.overlay) {
-        UIImageView *shadowView = nil;
-        NSArray *navigationBarSubviews = [self subviews];
-        for (UIView *view in navigationBarSubviews) {
+        UIImageView *shadow = nil;
+        NSArray *subviews = [self subviews];
+        for (UIView *view in subviews) {
             NSString *viewName = NSStringFromClass([view class]);
             if ([viewName isEqualToString:UINavigationBarBackground] ||
                 [viewName isEqualToString:UIBarBackground]) {
-                shadowView = [view valueForKey:ShadowView];
-                if (shadowView == nil) {
+                shadow = [view valueForKey:ShadowView];
+                if (shadow == nil) {
                     return;
                 }
                 
-                self.overlay = [[UIView alloc] initWithFrame:shadowView.frame];
+                self.overlay = [[UIView alloc] initWithFrame:shadow.frame];
                 self.overlay.userInteractionEnabled = NO;
                 self.overlay.translatesAutoresizingMaskIntoConstraints = NO;
                 [view addSubview:self.overlay];
-                [view addConstraints:[[self class] fillingConstraintsView:self.overlay superView:shadowView]];
+                [view addConstraints:[[self class] fillingConstraintsView:self.overlay superView:shadow]];
                 break;
             }
             
-            if (shadowView) {
+            if (shadow) {
                 break;
             }
         }
