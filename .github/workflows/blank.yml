@@ -9,7 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: pod install
+    - name: pod install 
       run: | 
         gem install cocoapods
+        cd Example
         pod install
